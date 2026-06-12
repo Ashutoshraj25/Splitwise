@@ -2,10 +2,9 @@ services:
   - type: web
     name: splitwise-backend
     runtime: node
-    rootDir: backend
-    buildCommand: npm install
-    preDeployCommand: npx prisma db push --skip-generate
-    startCommand: npm start
+    buildCommand: npm install --prefix backend
+    preDeployCommand: npm --prefix backend exec prisma db push -- --skip-generate --schema prisma/schema.prisma
+    startCommand: npm --prefix backend start
     healthCheckPath: /
     envVars:
       - key: NODE_ENV
