@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: splitwise-backend
+    runtime: node
+    rootDir: backend
+    buildCommand: npm install
+    preDeployCommand: npx prisma db push --skip-generate
+    startCommand: npm start
+    healthCheckPath: /
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: JWT_SECRET
+        sync: false
+      - key: DATABASE_URL
+        sync: false
